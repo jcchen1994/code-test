@@ -1,6 +1,10 @@
 package com.aspect;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Before;
+
 @org.aspectj.lang.annotation.Aspect
 public class Aspect {
   /*第一个“*”符号	表示返回值的类型任意
@@ -11,4 +15,16 @@ public class Aspect {
   public void beforeMethod()  {
     System.out.println("this is a before method");
   }
+
+  @After("execution(* com..*.*(..))")
+  public void afterMethod()  {
+    System.out.println("this is a after method");
+  }
+
+  @AfterThrowing(pointcut = "execution(* com..*.*(..))", throwing = "ex")
+  public void afterThrow(JoinPoint jp, Exception ex) {
+    System.out.println("aop handle the exception");
+  }
+
+
 }
